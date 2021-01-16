@@ -22,6 +22,11 @@ function OpenDialog(props) {
         setOpen(false);
     };
 
+    const openAuto = () => {
+        return React.useState(false)
+    }
+
+
     const addAttribution = () => {
         let name = document.getElementById('search').value;
         Axios.post('attributions/add', { id_client: name, id_ordinateur: props.ordinateur.id, horaire: props.horaire, date: props.date }).then(({ data }) => {
@@ -45,8 +50,8 @@ function OpenDialog(props) {
                 <DialogTitle id="alert-dialog-title">{"Ajouter une attribution"}</DialogTitle>
                 <DialogContent>
                     <Autocomplete
-                        // value={value}
                         id="search"
+                        open={open}
                         options={props.clients}
                         getOptionLabel={(option) => option.name}
                         style={{ width: 300 }}
